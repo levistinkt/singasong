@@ -1,0 +1,43 @@
+#tumb-btn-sml, #shazam-btn-sml, #heart-btn-sml, #gear-btn-sml, #request-btn-sml, #queue-btn-sml, #singalongIcon{
+    height: 2em;
+    fill:var(--theme-color);
+}
+
+#rocket-btn-sml{
+    height: 1.5em;
+    fill:var(--theme-color);
+}
+
+#request-btn-sml, #queue-btn-sml{
+    height: 2em;
+    fill:var(--theme-color);
+}
+
+#search-btn-sml, #SpeechRecog-sml, #old-female-sml{
+	height: 2em;
+    fill: none;
+    stroke: var(--theme-color);
+}
+
+#share-btn-sml, #shazam-btn-sml{
+	height: 2em;
+    fill: var(--theme-color);
+    stroke: var(--theme-color);
+}
+
+#aboutheader{	
+	font-size: 1em;
+	font-weight: bold;
+}
+
+#block{
+	display: flex;
+    align-items: center;
+}
+#icon{
+	margin-right: 1em;
+}
+
+#easypeasy{
+	text-align: center;
+}

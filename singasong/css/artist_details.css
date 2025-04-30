@@ -1,0 +1,71 @@
+#artist_cover{
+    min-width: 100%;
+    min-height: 100%;
+}
+#artistName{
+    color: white;
+    font-size: var(--btn-height);
+    font-weight: bolder;
+    -webkit-text-stroke: 1px var(--theme-color);
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); 
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+#artist_links{
+	display: flex;
+    justify-content: space-around;
+    padding-top: 0.5em;
+	align-items: center;
+	font-size: var(--font-size);
+    color: var(--font-color);
+}
+
+#followIcon{
+    height: 1.5em;
+    fill: none;
+    stroke: var(--theme-color);
+}
+
+#share-btn-dtl, #popularIcon{
+    height: 2em;
+    fill: none;
+    stroke: var(--theme-color);
+}
+
+#popularIconPath{
+	fill: var(--theme-color);
+}
+
+#followers, #popular{
+	display: flex;
+	align-items: center;
+}
+
+#artistHeader{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    overflow: hidden;
+    width: 100%;
+    height: 17em;
+    position:relative;
+}
+
+#request-songs{
+    color: var(--font-color);
+	padding-top: 1em;
+}
+
+#songs{
+    color: var(--font-color);
+}
+
+#duetIconSmall, #rapIconSmall, #karaokeIconSmall{
+    height: var(--h3-size);
+    fill: var(--theme-color);
+    vertical-align: middle;
+}

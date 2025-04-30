@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		
+		<script src="/js/jquery-latest.js"></script>
+		<script src="/js/jquery.flipster.min.js"></script>	
+        
+		<link rel="apple-touch-icon" href="../img/icons/apple-icon.png">
+        <link rel="icon" type="image/x-icon" href="/img/icons/favicon.ico">
+		<link rel="manifest" href="/manifest.json">
+		
+		<link type="text/css" href="/css/index.css" rel="stylesheet">
+		<link type="text/css" href="/css/about.css" rel="stylesheet">
+		<link type="text/css" href="/css/jquery.flipster.min.css" rel="stylesheet">
+		<link type="text/css" href="/css/latest_requests.css" rel="stylesheet">
+		        
+		<title>Sing a Song</title>
+		<style>
+			.install-prompt {
+				display: none;
+				background: var(--theme-color);
+				color: white;
+				padding: 10px 20px;
+				border-radius: 10px;
+				box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+				cursor: pointer;
+				width: 30%;
+				justify-self: right;
+				border: 1px solid white;
+
+			}
+			.install-prompt.show {
+				display: block;
+			}
+		</style>
+	</head>
+    <body>
+        <div id="topper">
+            <svg xmlns="http://www.w3.org/2000/svg" id="SpeechRecog" viewBox="0 0 24 24" fill="none">
+                <path d="M7 8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V11C17 13.7614 14.7614 16 12 16C9.23858 16 7 13.7614 7 11V8Z" stroke-width="1.5"/>
+                <path d="M13.5 8L17 8" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M13.5 11L17 11" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M7 8L9 8" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M7 11L9 11" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M20 10V11C20 15.4183 16.4183 19 12 19C7.58172 19 4 15.4183 4 11V10" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M12 19V22" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input type="text" id="search_box">
+			<div id="search_dropdown"></div>
+			<svg xmlns="http://www.w3.org/2000/svg" id="shazam-btn" viewBox="0 0 48 48" style="display:none">
+				<path d="M18.55,6a3.84,3.84,0,0,1,2,7.18l-4.35,2.51a6.12,6.12,0,1,0,6.13,10.6l4.34-2.51a3.84,3.84,0,0,1,3.84,6.65l-4.35,2.51A13.79,13.79,0,1,1,12.38,9l4.35-2.51A3.75,3.75,0,0,1,18.55,6Zm9.79,7.26A13.78,13.78,0,0,1,35.62,39l-4.35,2.51a3.84,3.84,0,1,1-4-6.56l.15-.08,4.35-2.51a6.13,6.13,0,1,0-6.13-10.61l-4.35,2.51a3.83,3.83,0,0,1-3.83-6.64l4.35-2.51a13.73,13.73,0,0,1,6.51-1.83Z"/>
+			</svg>
+		</div>
+        <main>
+			<img id="img-bg" src="/img/logo.png">
+			<div id="media"></div>
+            <div id="hdr">
+				<img src="/img/logo_full.png" id="logo_full"/>		
+				<div id="installPrompt" class="install-prompt">Installeer App</div>
+			</div>
+			<div class="js-list">
+				<div class="js-item is-idle" data-id="1">
+					<button type="button" class="list__item collapsible" onclick="foldOpen(event)">Recente nummers
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+					</button>
+					 <div class="js-child latest-widget" style="display:block;overflow:hidden;margin: 0em 0.5em 0em;">
+						<div id="recent-songs">
+							<div class="flipster"></div>
+						</div>
+					</div>
+				</div>
+				<div class="js-item is-idle" data-id="2">
+					<button type="button" class="list__item collapsible" onclick="foldOpen(event)" >Recente verzoeken
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+					</button>
+					<div class="js-child latest-widget" style="display:block; padding-bottom: 1em;">
+						<div class="grid-container" id="requests-container"></div>
+					</div>
+				</div>
+				<div class="js-item is-idle" data-id="3">
+					<button type="button" class="collapsible" onclick="foldOpen(event)">Uitleg
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+					</button>
+					<div class="js-child latest-widget" style="display:block; padding: 1em;color: var(--font-color);">
+						<p>
+							<div id="easypeasy">
+								<div id="aboutheader">Een avondje Sing-a-Song voorbereiden?</div>
+								<svg id="tumb-btn-sml"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -0.5 21 21" version="1.1">				
+									<g id="Page-1" stroke-width="1" fill-rule="evenodd">
+										<g id="Dribbble-Light-Preview" transform="translate(-219.000000, -760.000000)">
+											<g id="icons" transform="translate(56.000000, 160.000000)">
+												<path d="M163,610.021159 L163,618.021159 C163,619.126159 163.93975,620.000159 165.1,620.000159 L167.199999,620.000159 L167.199999,608.000159 L165.1,608.000159 C163.93975,608.000159 163,608.916159 163,610.021159 M183.925446,611.355159 L182.100546,617.890159 C181.800246,619.131159 180.639996,620.000159 179.302297,620.000159 L169.299999,620.000159 L169.299999,608.021159 L171.104948,601.826159 C171.318098,600.509159 172.754498,599.625159 174.209798,600.157159 C175.080247,600.476159 175.599997,601.339159 175.599997,602.228159 L175.599997,607.021159 C175.599997,607.573159 176.070397,608.000159 176.649997,608.000159 L181.127196,608.000159 C182.974146,608.000159 184.340196,609.642159 183.925446,611.355159" id="like-[#1386]">
+												</path>
+											</g>
+										</g>
+									</g>
+								</svg>
+								Easy peasy!
+								<svg id="tumb-btn-sml"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -0.5 21 21" version="1.1">				
+									<g id="Page-1" stroke-width="1" fill-rule="evenodd">
+										<g id="Dribbble-Light-Preview" transform="translate(-219.000000, -760.000000)">
+											<g id="icons" transform="translate(56.000000, 160.000000)">
+												<path d="M163,610.021159 L163,618.021159 C163,619.126159 163.93975,620.000159 165.1,620.000159 L167.199999,620.000159 L167.199999,608.000159 L165.1,608.000159 C163.93975,608.000159 163,608.916159 163,610.021159 M183.925446,611.355159 L182.100546,617.890159 C181.800246,619.131159 180.639996,620.000159 179.302297,620.000159 L169.299999,620.000159 L169.299999,608.021159 L171.104948,601.826159 C171.318098,600.509159 172.754498,599.625159 174.209798,600.157159 C175.080247,600.476159 175.599997,601.339159 175.599997,602.228159 L175.599997,607.021159 C175.599997,607.573159 176.070397,608.000159 176.649997,608.000159 L181.127196,608.000159 C182.974146,608.000159 184.340196,609.642159 183.925446,611.355159" id="like-[#1386]">
+												</path>
+											</g>
+										</g>
+									</g>
+								</svg>
+							</div>
+						</p>				
+						<br>				
+						<p>
+							<div id="aboutheader">1. Maak de app helemaal yours</div>
+							<div id="block">
+								<div id="icon">
+									<svg id="gear-btn-sml" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="_x32_" viewBox="0 0 512 512" xml:space="preserve">
+										<g>
+											<path d="M496,293.984c9.031-0.703,16-8.25,16-17.297v-41.375c0-9.063-6.969-16.594-16-17.313l-54.828-4.281   c-3.484-0.266-6.484-2.453-7.828-5.688l-18.031-43.516c-1.344-3.219-0.781-6.906,1.5-9.547l35.75-41.813   c5.875-6.891,5.5-17.141-0.922-23.547l-29.25-29.25c-6.406-6.406-16.672-6.813-23.547-0.922l-41.813,35.75   c-2.641,2.266-6.344,2.844-9.547,1.516l-43.531-18.047c-3.219-1.328-5.422-4.375-5.703-7.828l-4.266-54.813   C293.281,6.969,285.75,0,276.688,0h-41.375c-9.063,0-16.594,6.969-17.297,16.016l-4.281,54.813c-0.266,3.469-2.469,6.5-5.688,7.828   l-43.531,18.047c-3.219,1.328-6.906,0.75-9.563-1.516l-41.797-35.75c-6.875-5.891-17.125-5.484-23.547,0.922l-29.25,29.25   c-6.406,6.406-6.797,16.656-0.922,23.547l35.75,41.813c2.25,2.641,2.844,6.328,1.5,9.547l-18.031,43.516   c-1.313,3.234-4.359,5.422-7.813,5.688L16,218c-9.031,0.719-16,8.25-16,17.313v41.359c0,9.063,6.969,16.609,16,17.313l54.844,4.266   c3.453,0.281,6.5,2.484,7.813,5.703l18.031,43.516c1.344,3.219,0.75,6.922-1.5,9.563l-35.75,41.813   c-5.875,6.875-5.484,17.125,0.922,23.547l29.25,29.25c6.422,6.406,16.672,6.797,23.547,0.906l41.797-35.75   c2.656-2.25,6.344-2.844,9.563-1.5l43.531,18.031c3.219,1.344,5.422,4.359,5.688,7.844l4.281,54.813   c0.703,9.031,8.234,16.016,17.297,16.016h41.375c9.063,0,16.594-6.984,17.297-16.016l4.266-54.813   c0.281-3.484,2.484-6.5,5.703-7.844l43.531-18.031c3.203-1.344,6.922-0.75,9.547,1.5l41.813,35.75   c6.875,5.891,17.141,5.5,23.547-0.906l29.25-29.25c6.422-6.422,6.797-16.672,0.922-23.547l-35.75-41.813   c-2.25-2.641-2.844-6.344-1.5-9.563l18.031-43.516c1.344-3.219,4.344-5.422,7.828-5.703L496,293.984z M256,342.516   c-23.109,0-44.844-9-61.188-25.328c-16.344-16.359-25.344-38.078-25.344-61.203c0-23.109,9-44.844,25.344-61.172   c16.344-16.359,38.078-25.344,61.188-25.344c23.125,0,44.844,8.984,61.188,25.344c16.344,16.328,25.344,38.063,25.344,61.172   c0,23.125-9,44.844-25.344,61.203C300.844,333.516,279.125,342.516,256,342.516z"/>
+										</g>
+									</svg>
+								</div>
+								<div id="txt">
+									Via de instellingen pas je <i>kleuren, lettertypes en menu’s </i>aan naar jouw smaak. 
+								</div>
+							</div>
+						</p>				
+						<br>				
+						<p>
+							<div id="aboutheader">2. Zoek je favoriete nummers sneller dan ooit!</div>
+							<div id="block">
+								<div id="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" id="search-btn-sml" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1">
+									<defs>
+										<style>.cls-1{fill:none;stroke-miterlimit:10;stroke-width:1.91px;}</style>
+									</defs>
+									<circle class="cls-1" cx="9.14" cy="9.14" r="7.64"/>
+									<line class="cls-1" x1="22.5" y1="22.5" x2="14.39" y2="14.39"/>
+								</svg>
+								</div>
+								<div id="txt">
+								Typ je zoekterm bovenin de zoekbalk of klik op het vergrootglas in het menu. 
+								</div>
+							</div>
+							<br>
+							<div id="block">
+								<div id="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" id="SpeechRecog-sml" viewBox="0 0 24 24" fill="none">
+									<path d="M7 8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V11C17 13.7614 14.7614 16 12 16C9.23858 16 7 13.7614 7 11V8Z" stroke-width="1.5"/>
+									<path d="M13.5 8L17 8" stroke-width="1.5" stroke-linecap="round"/>
+									<path d="M13.5 11L17 11" stroke-width="1.5" stroke-linecap="round"/>
+									<path d="M7 8L9 8" stroke-width="1.5" stroke-linecap="round"/>
+									<path d="M7 11L9 11" stroke-width="1.5" stroke-linecap="round"/>
+									<path d="M20 10V11C20 15.4183 16.4183 19 12 19C7.58172 19 4 15.4183 4 11V10" stroke-width="1.5" stroke-linecap="round"/>
+									<path d="M12 19V22" stroke-width="1.5" stroke-linecap="round"/>
+								</svg>
+								</div>
+								<div id="txt">
+								Geen zin om te typen? No worries! Gebruik het microfoontje linksboven en spreek je zoekopdracht in 
+								</div>
+							</div>
+						</p>				
+						<br>				
+						<p>
+							<div id="aboutheader">3. Wil je een vriend tippen? </div>
+							<div id="block">
+								<div id="icon">
+									<svg xmlns="http://www.w3.org/2000/svg" id="share-btn-sml" viewBox="0 0 24 24" fill="none">
+										<path d="M9 12C9 13.3807 7.88071 14.5 6.5 14.5C5.11929 14.5 4 13.3807 4 12C4 10.6193 5.11929 9.5 6.5 9.5C7.88071 9.5 9 10.6193 9 12Z" stroke-width="1.5"/><path d="M14 6.5L9 10" stroke-width="1.5" stroke-linecap="round"/><path d="M14 17.5L9 14" stroke-width="1.5" stroke-linecap="round"/><path d="M19 18.5C19 19.8807 17.8807 21 16.5 21C15.1193 21 14 19.8807 14 18.5C14 17.1193 15.1193 16 16.5 16C17.8807 16 19 17.1193 19 18.5Z" stroke-width="1.5"/><path d="M19 5.5C19 6.88071 17.8807 8 16.5 8C15.1193 8 14 6.88071 14 5.5C14 4.11929 15.1193 3 16.5 3C17.8807 3 19 4.11929 19 5.5Z" stroke-width="1.8"/>
+									</svg> 
+								</div>
+								<div id="txt">
+									Deel je nummer met één klik
+								</div>
+							</div>
+						</p>
+						<br>				
+						<p>
+							<div id="aboutheader">4. En vergeet niet je favorieten te bewaren </div>
+							<div id="block">
+								<div id="icon">
+									<svg id="heart-btn-sml" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+										<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+										<g id="SVGRepo_iconCarrier" stroke-width="1.5">
+										<path d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"></path></g>
+									</svg>
+								</div>
+								<div id="txt">
+									Zo heb je jouw topnummers altijd bij de hand en hoef je ze op de avond zelf alleen nog maar in de wachtrij te zetten. 
+								</div>
+							</div>
+						</p>				
+						<br>				
+						<p>
+							<div id="aboutheader">5. The real deal: inloggen!</div>
+							<div id="block">
+								<div id="icon">
+									<svg xmlns="http://www.w3.org/2000/svg" id="request-btn-sml" viewBox="0 0 32 32" id="icon">
+										<path d="M22,22v6H6V4H16V2H6A2,2,0,0,0,4,4V28a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V22Z" transform="translate(0)"/><path d="M29.54,5.76l-3.3-3.3a1.6,1.6,0,0,0-2.24,0l-14,14V22h5.53l14-14a1.6,1.6,0,0,0,0-2.24ZM14.7,20H12V17.3l9.44-9.45,2.71,2.71ZM25.56,9.15,22.85,6.44l2.27-2.27,2.71,2.71Z" transform="translate(0)"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+									</svg>
+								</div>
+								<div id="txt">
+									Verzoeken: Mist jouw favo nummer? Vraag ‘m aan!<br>
+								</div>
+							</div>
+							<br>
+							<div id="block">
+								<div id="icon">
+									<svg xmlns="http://www.w3.org/2000/svg" id="shazam-btn-sml" viewBox="0 0 48 48">
+										<path d="M18.55,6a3.84,3.84,0,0,1,2,7.18l-4.35,2.51a6.12,6.12,0,1,0,6.13,10.6l4.34-2.51a3.84,3.84,0,0,1,3.84,6.65l-4.35,2.51A13.79,13.79,0,1,1,12.38,9l4.35-2.51A3.75,3.75,0,0,1,18.55,6Zm9.79,7.26A13.78,13.78,0,0,1,35.62,39l-4.35,2.51a3.84,3.84,0,1,1-4-6.56l.15-.08,4.35-2.51a6.13,6.13,0,1,0-6.13-10.61l-4.35,2.51a3.83,3.83,0,0,1-3.83-6.64l4.35-2.51a13.73,13.73,0,0,1,6.51-1.83Z"/>
+									</svg>
+								</div>
+								<div id="txt">
+									Shazam!: Hoor je een banger maar weet je niet van wie? Laat shazam het werk doen.<br>
+								</div>
+							</div>
+							<br>
+							<div id="block">
+								<div id="icon">
+									<svg xmlns="http://www.w3.org/2000/svg" id="queue-btn-sml" viewBox="0 0 48 48">
+										<g data-name="Layer 2"><g data-name="invisible box"><rect width="48" height="48" fill="none"/></g>
+											<g id="icons_Q2" data-name="icons Q2"><path d="M16,36a2,2,0,0,1-2-2V6a2,2,0,0,1,2-2h0a2,2,0,0,1,2,2V34a2,2,0,0,1-2,2Z" stroke-width="2px"/>
+												<path d="M24,36a2,2,0,0,1-2-2V6a2,2,0,0,1,2-2h0a2,2,0,0,1,2,2V34a2,2,0,0,1-2,2Z" stroke-width="2px"/>
+												<path d="M32,36a2,2,0,0,1-2-2V6a2,2,0,0,1,2-2h0a2,2,0,0,1,2,2V34a2,2,0,0,1-2,2Z" stroke-width="2px"/>
+												<path d="M39.7,26A2.1,2.1,0,0,0,38,28.1V40H10V28.1A2.1,2.1,0,0,0,8.3,26,2,2,0,0,0,6,28V42a2,2,0,0,0,2,2H40a2,2,0,0,0,2-2V28A2,2,0,0,0,39.7,26Z" stroke-width="2px"/>
+												<path d="M9.8,15.7,2.5,11.1c-.3-.2-.5-.1-.5.3v9.2c0,.4.2.5.5.3l7.3-4.6Q10.3,16,9.8,15.7Z" stroke-width="2px"/>
+												<path d="M45.8,15.7l-7.3-4.6c-.3-.2-.5-.1-.5.3v9.2c0,.4.2.5.5.3l7.3-4.6Q46.3,16,45.8,15.7Z" stroke-width="2px"/>
+											</g>
+										</g>
+									</svg>
+								</div>
+								<div id="txt">
+									Wachtrij: Zet je nummers op de betreffende avond in de rij en bereid je vocale meesterwerk voor. Sleep je achtergrondkoor mee en shine wanneer je aan de beurt bent! </p>
+								</div>
+							</div>
+						</p>				
+					</div>
+				</div>
+				<div class="js-item is-idle" data-id="4">
+					<button type="button" class="list__item collapsible" onclick="foldOpen(event)" >Iconen
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+					</button>
+					<div class="js-child latest-widget" style="display:block; padding: 1em;color: var(--font-color);">
+						<p> .. en wat betekenen al die iconen in de app ?! Check het hier, wel zo gemakkelijk </p>
+						
+						<p><svg id="rapIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><path d="M65.9,21.4c0.2,0.2,0.4,0.4,0.6,0.5c9.6,9.7,9.4,39.8,9.4,41.1c0,0.5-0.5,1-1,1h0c-0.6,0-1-0.5-1-1c0-0.3,0.2-30.6-8.8-39.6  c-1.4-1.4-2.9-2.2-4.6-2.4c-0.3,0-0.5,0-0.8,0c-0.3,0-0.6,0-0.9,0C38.6,21.8,37,50.4,37,50.7c0,0.5-0.5,1-1,1c0,0,0,0,0,0  c-0.6,0-1-0.5-1-1c0-0.3,1.1-20.2,13.1-28.3c-15.7,4-25.7,16.4-26.9,34.8L2.4,75.9c-1.5,1.5-0.2,3.9,1.8,3.6c2.3-0.3,5-1.6,7.9-1.6  c13.9,0,14.4,8.2,30.6,8.2c11.8,0,24.8-12.7,30.9-19.5c17.7-1.5,24.7-5.6,24.7-5.6C98.2,38.6,84.2,24.1,65.9,21.4z M67.9,67  c-6.3,0-13.4-3.3-20.2-6.5c-5.7-2.7-11.1-5.2-15.1-5.2c-5.5,0-7.4,1.1-7.4,1.1c-0.5,0.3-1.1,0.2-1.4-0.3c-0.3-0.5-0.2-1.1,0.3-1.4  c0.2-0.2,2.4-1.5,8.5-1.5c4.4,0,10,2.6,16,5.4c6.6,3.1,13.5,6.3,19.3,6.3c0.6,0,1,0.4,1,1S68.5,67,67.9,67z M63,17  c-0.1-1.8-1.5-3.2-3.3-3.2c-1.8,0-3.2,1.4-3.3,3.1c1.1-0.1,2.2-0.1,3.3-0.1C60.8,16.8,61.9,16.9,63,17z"/></svg>
+						.. staat voor rapmode, perfect voor je innerlijke Eminem of Donnie. </p>
+						
+						<p><svg id="duetIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" fill="none"/><path fill-rule="evenodd" clip-rule="evenodd" d="M5 9.5C5 7.01472 7.01472 5 9.5 5C11.9853 5 14 7.01472 14 9.5C14 11.9853 11.9853 14 9.5 14C7.01472 14 5 11.9853 5 9.5Z"/><path d="M14.3675 12.0632C14.322 12.1494 14.3413 12.2569 14.4196 12.3149C15.0012 12.7454 15.7209 13 16.5 13C18.433 13 20 11.433 20 9.5C20 7.567 18.433 6 16.5 6C15.7209 6 15.0012 6.2546 14.4196 6.68513C14.3413 6.74313 14.322 6.85058 14.3675 6.93679C14.7714 7.70219 15 8.5744 15 9.5C15 10.4256 14.7714 11.2978 14.3675 12.0632Z" /><path fill-rule="evenodd" clip-rule="evenodd" d="M4.64115 15.6993C5.87351 15.1644 7.49045 15 9.49995 15C11.5112 15 13.1293 15.1647 14.3621 15.7008C15.705 16.2847 16.5212 17.2793 16.949 18.6836C17.1495 19.3418 16.6551 20 15.9738 20H3.02801C2.34589 20 1.85045 19.3408 2.05157 18.6814C2.47994 17.2769 3.29738 16.2826 4.64115 15.6993Z"/><path d="M14.8185 14.0364C14.4045 14.0621 14.3802 14.6183 14.7606 14.7837V14.7837C15.803 15.237 16.5879 15.9043 17.1508 16.756C17.6127 17.4549 18.33 18 19.1677 18H20.9483C21.6555 18 22.1715 17.2973 21.9227 16.6108C21.9084 16.5713 21.8935 16.5321 21.8781 16.4932C21.5357 15.6286 20.9488 14.9921 20.0798 14.5864C19.2639 14.2055 18.2425 14.0483 17.0392 14.0008L17.0194 14H16.9997C16.2909 14 15.5506 13.9909 14.8185 14.0364Z"/></svg>
+						.. betekent dat je samen een episch duet kunt zingen met ieder hun eigen deel van de tekst — denk aan Lady Gaga & Bruno Mars met "Die with a smile". De ene zingt Bruno en de ander probeert de noten van Lady Gaga te raken. </p>
+						
+						<p><svg id="karaokeIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="karaokeIcon" viewBox="0 0 512 512" xml:space="preserve" fill="none"><style type="text/css"></style><g><polygon points="0.001,437.167 74.823,512 354.337,254.387 257.614,157.664"/><path d="M269.9,143.663l98.428,98.417c34.239,6.143,70.52-2.472,98.869-25.709L295.63,44.804 C272.393,73.153,263.757,109.412,269.9,143.663z"/><path d="M476.317,35.674c-45.989-45.98-119.466-47.463-167.392-4.734l172.135,172.135 C523.789,155.15,522.306,81.663,476.317,35.674z"/></g></svg>
+						.. Karaoke in full force! Wel muziek, maar geen vocale begeleiding. Hier zing je écht de sterren van de hemel (of in ieder geval een poging tot). </p>
+						
+						<p><svg id="singalongIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 32 32" xml:space="preserve"><style type="text/css">.sharpcorners_een{}.st0{;}</style><path class="sharpcorners_een" d="M29,22c0,2-1.586,4.425-4.305,4.905c-2.719,0.479-5.235-0.895-5.619-3.071  c-0.384-2.176,1.51-4.328,4.229-4.807c1.364-0.241,2.676-0.014,3.695,0.546V8.465l-15,3.579c0,0,0,10.956,0,12.956  s-1.586,4.425-4.305,4.905c-2.719,0.479-5.235-0.895-5.619-3.071c-0.384-2.176,1.51-4.328,4.229-4.807  C7.67,21.786,8.982,22.012,10,22.572V6.421L29,2C29,2,29,20,29,22z"/></svg>
+						.. Of geen icoon? Dan is het een sing-a-long nummer — lekker meezingen zonder al te veel druk. </p>
+						<p>
+							<svg id="rocket-btn-sml" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" viewBox="0 0 969.945 969.945" xml:space="preserve">
+								<g>
+									<polygon points="319.5,470.672 424.4,510.672 485.9,534.072 590.8,574.072 680.101,484.672 408.9,381.373  "/>
+									<polygon points="447.601,342.572 718.9,445.972 780.601,384.172 593.3,196.873  "/>
+									<path d="M385.7,549.373l-104.9-40l-25,25c-14.5,14.5-17,36.398-7.6,53.5c-4.6,2.6-9.2,5-14.1,7.199c-0.7,0.301-1.5,0.6-2.2,0.9   c-2.5,1-5.1,1.9-7.7,2.699c-4.6,1.5-9.4,2.801-14.2,3.9c-2.1,0.5-4.3,0.9-6.4,1.301c-1.1,0.199-2.1,0.398-3.2,0.5   c-0.3,0-0.5,0.1-0.7,0.1c-4.8,0.6-9.6,0.9-14.4,1c-4.9,0.1-9.8,0-14.7-0.301c-1.9-0.1-3.9-0.299-5.8-0.5c1.3,0.1-4.8-0.799-6-1   c-21.8-4.1-42-13.699-63.5-18.699c-23.7-5.5-48.5-7.201-72.8-4.9c-12.2,1.199-22.5,9.301-22.5,22.5c0,11.4,10.3,23.699,22.5,22.5   c11.2-1.1,22.4-1.301,33.6-0.6c2.5,0.1,5,0.4,7.4,0.6c1.2,0.1,2.5,0.301,3.7,0.4c0.3,0,0.5,0.1,0.7,0.1c0.2,0,0.4,0.1,0.7,0.1   c6.2,0.9,12.3,2.201,18.3,3.6c22.4,5.4,43.4,15.4,66.3,18.9c43.5,6.701,89.1-2.1,125.9-26.6l17.1,17.1l-272.3,272.5   c-11.7,11.701-11.7,30.701,0,42.4c5.9,5.9,13.5,8.801,21.2,8.801c7.7,0,15.4-2.9,21.2-8.801l272.5-272.5l40.601,40.6   c17.6,17.6,46.1,17.6,63.6,0l108.9-108.9l-104.9-40L385.7,549.373z"/>
+									<path d="M940.101,7.572c-1.7,0-3.4,0.1-5.2,0.4l-341.3,58.7c-24,4.1-33.301,33.6-16.101,50.8l61.4,61.4l159.7,159.7l61.399,61.4   c6,6,13.601,8.8,21.101,8.8c13.699,0,27-9.399,29.699-24.899l58.7-341.3C972.7,23.972,958.2,7.572,940.101,7.572z"/>
+								</g>
+							</svg>
+							<b>"Let’s get the party started!"</b>
+							<svg id="rocket-btn-sml" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" viewBox="0 0 969.945 969.945" xml:space="preserve">
+								<g>
+									<polygon points="319.5,470.672 424.4,510.672 485.9,534.072 590.8,574.072 680.101,484.672 408.9,381.373  "/>
+									<polygon points="447.601,342.572 718.9,445.972 780.601,384.172 593.3,196.873  "/>
+									<path d="M385.7,549.373l-104.9-40l-25,25c-14.5,14.5-17,36.398-7.6,53.5c-4.6,2.6-9.2,5-14.1,7.199c-0.7,0.301-1.5,0.6-2.2,0.9   c-2.5,1-5.1,1.9-7.7,2.699c-4.6,1.5-9.4,2.801-14.2,3.9c-2.1,0.5-4.3,0.9-6.4,1.301c-1.1,0.199-2.1,0.398-3.2,0.5   c-0.3,0-0.5,0.1-0.7,0.1c-4.8,0.6-9.6,0.9-14.4,1c-4.9,0.1-9.8,0-14.7-0.301c-1.9-0.1-3.9-0.299-5.8-0.5c1.3,0.1-4.8-0.799-6-1   c-21.8-4.1-42-13.699-63.5-18.699c-23.7-5.5-48.5-7.201-72.8-4.9c-12.2,1.199-22.5,9.301-22.5,22.5c0,11.4,10.3,23.699,22.5,22.5   c11.2-1.1,22.4-1.301,33.6-0.6c2.5,0.1,5,0.4,7.4,0.6c1.2,0.1,2.5,0.301,3.7,0.4c0.3,0,0.5,0.1,0.7,0.1c0.2,0,0.4,0.1,0.7,0.1   c6.2,0.9,12.3,2.201,18.3,3.6c22.4,5.4,43.4,15.4,66.3,18.9c43.5,6.701,89.1-2.1,125.9-26.6l17.1,17.1l-272.3,272.5   c-11.7,11.701-11.7,30.701,0,42.4c5.9,5.9,13.5,8.801,21.2,8.801c7.7,0,15.4-2.9,21.2-8.801l272.5-272.5l40.601,40.6   c17.6,17.6,46.1,17.6,63.6,0l108.9-108.9l-104.9-40L385.7,549.373z"/>
+									<path d="M940.101,7.572c-1.7,0-3.4,0.1-5.2,0.4l-341.3,58.7c-24,4.1-33.301,33.6-16.101,50.8l61.4,61.4l159.7,159.7l61.399,61.4   c6,6,13.601,8.8,21.101,8.8c13.699,0,27-9.399,29.699-24.899l58.7-341.3C972.7,23.972,958.2,7.572,940.101,7.572z"/>
+								</g>
+							</svg>
+						</p>
+					</div>
+				</div>
+			</div>
+            <div id="song-menu">
+                <div id="menu-header"></div>
+                <div id="menu-details"></div>
+            </div>
+			<div id="bgMenuOverlay"></div>
+			<div id="bgMediaOverlay"></div>
+			<div id="loader"></div>
+        </main>
+        <div id="footer">
+			<li>
+				<a href="/index.html">
+					<svg xmlns="http://www.w3.org/2000/svg" id="home-btn" viewBox="0 0 24 24" fill="none">
+						<path d="M2.36407 12.9579C1.98463 10.3208 1.79491 9.00229 2.33537 7.87495C2.87583 6.7476 4.02619 6.06234 6.32691 4.69181L7.71175 3.86687C9.80104 2.62229 10.8457 2 12 2C13.1543 2 14.199 2.62229 16.2882 3.86687L17.6731 4.69181C19.9738 6.06234 21.1242 6.7476 21.6646 7.87495C22.2051 9.00229 22.0154 10.3208 21.6359 12.9579L21.3572 14.8952C20.8697 18.2827 20.626 19.9764 19.451 20.9882C18.2759 22 16.5526 22 13.1061 22H10.8939C7.44737 22 5.72409 22 4.54903 20.9882C3.37396 19.9764 3.13025 18.2827 2.64284 14.8952L2.36407 12.9579Z" stroke-width="1.5"/>
+						<path d="M15 18H9" stroke-width="1.5" stroke-linecap="round"/>
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a href="/pages/song_search.html">
+				<svg xmlns="http://www.w3.org/2000/svg" id="search-btn" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1">
+					<defs>
+						<style>.cls-1{fill:none;stroke-miterlimit:10;stroke-width:1.91px;}</style>
+					</defs>
+					<circle class="cls-1" cx="9.14" cy="9.14" r="7.64"/>
+					<line class="cls-1" x1="22.5" y1="22.5" x2="14.39" y2="14.39"/>
+				</svg>
+				</a>
+			</li>
+			<li style="display:none;">
+				<a href="/pages/request.html">
+					<svg xmlns="http://www.w3.org/2000/svg" id="request-btn" viewBox="0 0 32 32" id="icon">
+						<defs><style>.cls-1{fill:none;}</style></defs>
+						<path d="M22,22v6H6V4H16V2H6A2,2,0,0,0,4,4V28a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V22Z" transform="translate(0)"/><path d="M29.54,5.76l-3.3-3.3a1.6,1.6,0,0,0-2.24,0l-14,14V22h5.53l14-14a1.6,1.6,0,0,0,0-2.24ZM14.7,20H12V17.3l9.44-9.45,2.71,2.71ZM25.56,9.15,22.85,6.44l2.27-2.27,2.71,2.71Z" transform="translate(0)"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a href='/pages/song_list.html?favourite=1'>
+					<svg id="heart-btn" class="btn-off" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ff0000">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier" stroke-width="1.5">
+						<path d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"></path></g>
+					</svg>
+				</a>
+			<li>
+				<a href="/pages/_profile.html">
+					<svg xmlns="http://www.w3.org/2000/svg" id="profile-btn" class="btn-off" 	viewBox="0 0 16 16">
+						<path d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z"/>
+						<path d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z"/>
+					</svg>
+				</a>
+			</li>
+			<li style="display:none;">
+				<a href="/pages/profile.html">
+					<svg xmlns="http://www.w3.org/2000/svg" id="profile-btn" class="btn-on" 	viewBox="0 0 16 16">
+						<path d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z"/>
+						<path d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z"/>
+					</svg>
+				</a>
+			</li>
+        </div>
+		<script src="/js/app.js"></script>
+        <script src="/js/generic.js"></script>
+		<script src="/js/index.js"></script>
+		<script src="/js/songs.js"></script>
+    </body>
+</html>

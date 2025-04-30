@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Sing a song</title>
+        <link type="text/css" href="/css/index.css" rel="stylesheet">
+		<link type="text/css" href="/css/Rolldate.css" rel="stylesheet">
+		<link type="text/css" href="/css/settings.css" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="/img/icons/favicon.ico">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+        <meta name="apple-mobile-web-app-status-bar" content="#101743">
+        <script src="/js/jquery-latest.js"></script>
+    </head>
+    <body>
+        <div id="topper"></div>
+        <main>
+			<img id="img-bg" src="/img/logo.png">
+			<div id="media"></div>
+            <h3>Instellingen</h3>
+            <div class="js-list">
+                <div class="js-item is-idle" data-id="1">
+                    <button type="button" class="list__item collapsible" onclick="foldOpen(event)">Kleuren
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+
+                        <div class="handle" style="display: none;">
+                            <input type="checkbox" class="js-visibility-checkbox" checked>
+                            <div class="js-child-toggle child-toggle"></div>
+                            <div class="js-drag-handle drag-handle"></div>
+                        </div>
+                    </button>
+                    <div class="js-child last-searches-widget" style="display:none">
+                        <div id="theme">
+                            <p id="kop">Thema</p>
+                            <div id="theme-picker-section" class="theme-section">      
+                                <input type="radio" name="theme" value="cyan">
+                                <input type="radio" name="theme" value="purple">
+                                <input type="radio" name="theme" value="violet">
+                                <input type="radio" name="theme" value="indigo">
+                                <input type="radio" name="theme" value="black">
+
+                            </div>
+                            <div id="theme-picker-section" class="theme-section">      
+                                <input type="radio" name="theme" value="red">
+                                <input type="radio" name="theme" value="orange">
+                                <input type="radio" name="theme" value="yellow">
+                                <input type="radio" name="theme" value="green">
+                                <input type="radio" name="theme" value="blue">
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="modus">
+                            <p id="kop">Donkere modus</p>
+                            <div id="mode">
+                                <p>Aan / Uit</p>
+                                <div id="switch-section">
+                                    <label class="switch">
+                                        <input type="checkbox" id="themebox"/>
+                                        <span class="slider round"></span>
+                                    </label>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+                <div class="js-item is-idle" data-id="2">
+                    <button type="button" class="list__item collapsible" onclick="foldOpen(event)">Lettertype
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+
+                        <div class="handle" style="display: none;">
+                            <input type="checkbox" class="js-visibility-checkbox" checked>
+                            <div class="js-child-toggle child-toggle"></div>
+                            <div class="js-drag-handle drag-handle"></div>
+                        </div>
+                    </button>
+                     <div class="js-child last-searches-widget" style="display:none">
+                        <div id="fsize">
+                            <p id="kop">Letter grootte</p>
+                            <div id="font-size-wrapper">
+                                <input type="button" id="font-down-btn" value="&#8681;">
+                                <input type="button" id="font-up-btn" value="&#8679;">
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="ftype">
+                            <p id="kop">Letter type</p>
+                            <div id="font-type-wrapper">    
+                                <div id="font-picker-section"> 
+                                    <input type="radio" id="Arial" name="font" value="arial">
+                                    <label for="Arial" style="font-family:Arial, sans-serif">Sing a Song is the best !</label><br>
+                                    <input type="radio" id="Brush "name="font" value="brush">
+                                    <label for="Bursh" style="font-family:Brush Script MT, cursive">Sing a Song is the best !</label><br>
+                                    <input type="radio" id="Courier" name="font" value="times">
+                                    <label for="Times" style="font-family:Times New Roman, serif">Sing a Song is the best !</label><br>
+                                    <input type="radio" id="Comic" name="font" value="courier">
+                                    <label for="Comic" style="font-family:Courier New, monospacef">Sing a Song is the best !</label><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="js-item is-idle" data-id="3" id="menuSetup">
+                    <button type="button" class="list__item collapsible" onclick="foldOpen(event)">Menu indeling
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+
+                        <div class="handle" style="display: none;">
+                            <input type="checkbox" class="js-visibility-checkbox" checked>
+                            <div class="js-child-toggle child-toggle"></div>
+                            <div class="js-drag-handle drag-handle"></div>
+                        </div>
+                    </button>
+                     <div class="js-child last-searches-widget" style="display:none">
+                        <div id="menu_pos">
+                            <p id="kop">Wijzig knoppen indeling</p>
+                            <div id="horizontal-pos">
+                                <p>Flip horizontaal</p>
+                                <div id="horizontal-wrapper">
+									<svg xmlns="http://www.w3.org/2000/svg" id="hor-btn" viewBox="0 0 24 24" fill="none">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M2.14935 19.5257C2.33156 19.8205 2.65342 20 3 20H10C10.5523 20 11 19.5523 11 19V4.99998C11 4.5362 10.6811 4.13328 10.2298 4.02673C9.77838 3.92017 9.31298 4.13795 9.10557 4.55276L2.10557 18.5528C1.95058 18.8628 1.96714 19.2309 2.14935 19.5257ZM4.61804 18L9 9.23604V18H4.61804ZM13 19C13 19.5523 13.4477 20 14 20H21C21.3466 20 21.6684 19.8205 21.8507 19.5257C22.0329 19.2309 22.0494 18.8628 21.8944 18.5528L14.8944 4.55276C14.687 4.13795 14.2216 3.92017 13.7702 4.02673C13.3189 4.13328 13 4.5362 13 4.99998V19Z"/>
+									</svg>      
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div id="menu_pos">
+                            <p id="kop">Verwissel topbalk met bodembalk</p>
+                            <div id="vertical-pos">
+                                <p>Flip verticaal</p>
+                                <div id="vertical-wrapper">
+									<svg xmlns="http://www.w3.org/2000/svg" id="ver-btn" viewBox="0 0 24 24" fill="none">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M6.44721 2.10557C6.13723 1.95058 5.76909 1.96714 5.47427 2.14935C5.17945 2.33156 5 2.65342 5 3V10C5 10.5523 5.44772 11 6 11H20C20.4638 11 20.8667 10.6811 20.9732 10.2298C21.0798 9.77838 20.862 9.31298 20.4472 9.10557L6.44721 2.10557ZM7 9V4.61804L15.7639 9H7ZM5 14C5 13.4477 5.44772 13 6 13H20C20.4638 13 20.8667 13.3189 20.9732 13.7702C21.0798 14.2216 20.862 14.687 20.4472 14.8944L6.44721 21.8944C6.13723 22.0494 5.76909 22.0329 5.47427 21.8507C5.17945 21.6684 5 21.3466 5 21V14Z"/>
+									</svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<div class="js-item is-idle" data-id="4" id="pageSetup" style="display:none">
+                    <button type="button" class="list__item collapsible" onclick="foldOpen(event)" style="display:none">Pagina indeling
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+
+                        <div class="handle" style="display: none;">
+                            <input type="checkbox" class="js-visibility-checkbox" checked>
+                            <div class="js-child-toggle child-toggle"></div>
+                            <div class="js-drag-handle drag-handle"></div>
+                        </div>
+                    </button>
+                    <div class="js-child last-searches-widget" style="display:none">
+                    </div>     
+                </div>
+				<div class="js-item is-idle" data-id="5" id="admin" style="display:none">
+                    <button type="button" class="list__item collapsible" onclick="foldOpen(event)">Admin
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+
+                        <div class="handle" style="display: none;">
+                            <input type="checkbox" class="js-visibility-checkbox" checked>
+                            <div class="js-child-toggle child-toggle"></div>
+                            <div class="js-drag-handle drag-handle"></div>
+                        </div>
+                    </button>
+                    <div class="js-child last-searches-widget">
+						<div id="adminlinks">
+							<button type="button" class="settings-confirm" id="loadSongs-btn">Update nummers</button>
+							<button type="button" class="settings-confirm" id="updateUserToken">Update tokens</button>
+							<button type="button" class="settings-confirm" id="setDate">Update datum</button>
+							<br>
+							<button type="button" class="settings-confirm" id="users">Gebruikersbeheer</button>
+							<button type="button" class="settings-confirm" id="queue">Wachtrijbeheer</button>
+						</div>
+                    </div>     
+                </div>
+            </div>
+			<hr>
+			<div id="settings-controls">
+				<button type="button" class="settings-confirm" id="saveSettings">Opslaan</button>
+				<button type="button" class="settings-confirm" id="goBack">Terug</button>
+				<button type="button" class="settings-confirm" id="resetSettings">Herstellen</button>
+			</div>
+			<div id="song-menu">
+				<div id="menu-header"></div>
+				<div id="menu-details"></div>
+			</div>
+			<div id="bgMenuOverlay"></div>
+			<div id="bgMediaOverlay"></div>
+			<div id="loader"></div>	
+        </main>        
+		<div id="footer"></div>
+        <script src="/js/Rolldate1.js"></script>
+		<script src="/js/generic.js"></script>
+        <script src="/js/settings.js"></script>
+    </body>
+</html>

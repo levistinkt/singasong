@@ -1,0 +1,49 @@
+.carousel {
+    height: 11em;
+    width: 150px;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.item {
+    display: block;
+    position: absolute;
+    width: 150px;
+    font-size: 1em;
+    text-align: center;
+    color: #FFF;
+    opacity: 0.95;
+	box-shadow: none;
+}
+
+.a {
+    transform: rotateY(0deg) translateZ(150px);
+    width: 150px;
+    height: 150px;
+}
+.b {
+    transform: rotateY(60deg) translateZ(150px);
+    width: 150px;
+    height: 150px;
+}
+.c {
+    transform: rotateY(120deg) translateZ(150px);
+    width: 150px;
+    height: 150px;
+}
+.d {
+    transform: rotateY(180deg) translateZ(150px);
+    width: 150px;
+    height: 150px;
+}
+.e {
+    transform: rotateY(240deg) translateZ(150px);
+    width: 150px;
+    height: 150px;
+} 
+.f {
+    transform: rotateY(300deg) translateZ(150px);
+    width: 150px;
+    height: 150px;
+}

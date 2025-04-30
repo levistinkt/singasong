@@ -1,0 +1,9 @@
+#result-artists, #result-songs{
+	padding-top: 1em;
+}
+
+#duetIconSmall, #rapIconSmall, #karaokeIconSmall{
+    height: var(--h3-size);
+    fill: var(--theme-color);
+    vertical-align: middle;
+}

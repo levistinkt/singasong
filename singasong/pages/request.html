@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Sing a song</title>
+        <link type="text/css" href="/css/index.css" rel="stylesheet">
+		<link type="text/css" href="/css/request.css" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="/img/icons/favicon.ico">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+        <meta name="apple-mobile-web-app-status-bar" content="#101743">
+		<script src="/js/jquery-latest.js"></script>
+    </head>
+    <body>
+        <div id="topper">
+            <svg xmlns="http://www.w3.org/2000/svg" id="SpeechRecog" viewBox="0 0 24 24" fill="none">
+                <path d="M7 8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V11C17 13.7614 14.7614 16 12 16C9.23858 16 7 13.7614 7 11V8Z" stroke-width="1.5"/>
+                <path d="M13.5 8L17 8" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M13.5 11L17 11" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M7 8L9 8" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M7 11L9 11" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M20 10V11C20 15.4183 16.4183 19 12 19C7.58172 19 4 15.4183 4 11V10" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M12 19V22" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input type="text" id="search_box">
+			<div id="search_dropdown"></div>
+			<svg xmlns="http://www.w3.org/2000/svg" id="shazam-btn" viewBox="0 0 48 48" style="display:none">
+				<path d="M18.55,6a3.84,3.84,0,0,1,2,7.18l-4.35,2.51a6.12,6.12,0,1,0,6.13,10.6l4.34-2.51a3.84,3.84,0,0,1,3.84,6.65l-4.35,2.51A13.79,13.79,0,1,1,12.38,9l4.35-2.51A3.75,3.75,0,0,1,18.55,6Zm9.79,7.26A13.78,13.78,0,0,1,35.62,39l-4.35,2.51a3.84,3.84,0,1,1-4-6.56l.15-.08,4.35-2.51a6.13,6.13,0,1,0-6.13-10.61l-4.35,2.51a3.83,3.83,0,0,1-3.83-6.64l4.35-2.51a13.73,13.73,0,0,1,6.51-1.83Z"/>
+			</svg>
+        </div>
+        <main>
+			<img id="img-bg" src="/img/logo.png">
+			<div id="media"></div>
+			<h3>Verzoeken</h3>
+            <div class="js-list">
+                <div class="js-item is-idle" data-id="1">
+                    <button type="button" class="list__item collapsible" onclick="foldOpen(event)">Aanmaken
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+
+                        <div class="handle" style="display: none;">
+                            <input type="checkbox" class="js-visibility-checkbox" checked>
+                            <div class="js-child-toggle child-toggle"></div>
+                            <div class="js-drag-handle drag-handle"></div>
+                        </div>
+                    </button> 
+                    <div class="js-child" id="createRequest" style="display:block">
+						<form action="/php/request.php" method="POST"> 
+							<div class="requestForm">
+								<input type="text" id="action" value="add" name="action" style="display:none;">
+								<label for="artist"><b>Artiest</b></label>
+								<input type="text" id="artist-form" placeholder="Vul artiest in" name="artist" autocomplete="Artiest" required>
+								
+								<label for="title"><b>Titel</b></label>
+								<input type="text" id="title-form" placeholder="Vul titel in" name="title" autocomplete="Titel" required>
+								
+								<label for="comment"><b>Commentaar</b></label>
+								<input type="text" id="comment-form" placeholder="Vul commentaar in" name="comment" autocomplete="Comment">
+								
+								<label for="comment"><b>Type</b></label><hr>
+								<div id="requestType">
+									<input type="checkbox" id="singalong" name="singalong"/>
+									<label for="singalong">Sing-a-long</label>
+									
+									<input type="checkbox" id="karaoke" name="karaoke"/>
+									<label for="karaoke">Karaoke</label>
+									
+									<input type="checkbox" id="duet" name="duet"/>
+									<label for="duet">Duet</label>
+								</div>
+								<br>
+							</div>
+							<div class="requestctl">
+								<button type="submit" class="requestbtn" name="requestbtn">Invoeren</button>
+							</div>
+						</form>
+					</div>					
+                </div>
+				<div class="js-item is-idle" id="editRequestBlock" data-id="2">
+                    <button type="button" class="list__item collapsible" onclick="foldOpen(event)">Bewerken
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+
+                        <div class="handle" style="display: none;">
+                            <input type="checkbox" class="js-visibility-checkbox" checked>
+                            <div class="js-child-toggle child-toggle"></div>
+                            <div class="js-drag-handle drag-handle"></div>
+                        </div>
+                    </button>
+                    <div class="js-child" style="display:none">
+						<div id="editRequests"></div>
+					</div>	
+				</div>
+				<div class="js-item is-idle" data-id="4">
+                    <button type="button" class="list__item collapsible" onclick="foldOpen(event)">Lijst
+						<svg xmlns="http://www.w3.org/2000/svg" id="colapse-btn" viewBox="0 0 16 16">
+							<path d="M10 8H9V4.8198L5.15728 4.05126C4.98683 4.01717 4.81343 4 4.63961 4C3.18179 4 2 5.18179 2 6.63961V9H0V6.63961C0 4.07722 2.07722 2 4.63961 2C4.94514 2 5.24992 2.03018 5.54951 2.0901L9 2.7802V0H10L14 4L10 8Z"/>
+							<path d="M16 7V9.36039C16 11.9228 13.9228 14 11.3604 14C11.0549 14 10.7501 13.9698 10.4505 13.9099L7 13.2198V16H6L2 12L6 8H7V11.1802L10.8427 11.9487C11.0132 11.9828 11.1866 12 11.3604 12C12.8182 12 14 10.8182 14 9.36039V7H16Z"/>
+						</svg>
+
+                        <div class="handle" style="display: none;">
+                            <input type="checkbox" class="js-visibility-checkbox" checked>
+                            <div class="js-child-toggle child-toggle"></div>
+                            <div class="js-drag-handle drag-handle"></div>
+                        </div>
+                    </button>
+                    <div class="js-child">
+						<div id="lstHdr">
+							<div id="request-switch-section">
+								<p>Historie</p>
+								<label class="switch">
+									<input type="checkbox" id="req-history-box"/>
+									<span class="slider round"></span>
+								</label>
+							</div>
+							<div class="requestForm">
+								<p id="requestSearch"><input type="text" id="requestSearch-form" name="requestSearchBar" placeholder="Zoeken.."></p>
+							</div>
+							<hr>
+						<div id="requestList"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="song-menu">
+				<div id="menu-header"></div>
+				<div id="menu-details"></div>
+			</div>
+			<div id="bgMenuOverlay"></div>
+			<div id="bgDropdownOverlay"></div>
+			<div id="bgMediaOverlay"></div>
+			<div id="loader"></div>
+        </main>		
+		<div id="footer">
+			<li>
+				<a href="/index.html">
+					<svg xmlns="http://www.w3.org/2000/svg" id="home-btn" viewBox="0 0 24 24" fill="none">
+						<path d="M2.36407 12.9579C1.98463 10.3208 1.79491 9.00229 2.33537 7.87495C2.87583 6.7476 4.02619 6.06234 6.32691 4.69181L7.71175 3.86687C9.80104 2.62229 10.8457 2 12 2C13.1543 2 14.199 2.62229 16.2882 3.86687L17.6731 4.69181C19.9738 6.06234 21.1242 6.7476 21.6646 7.87495C22.2051 9.00229 22.0154 10.3208 21.6359 12.9579L21.3572 14.8952C20.8697 18.2827 20.626 19.9764 19.451 20.9882C18.2759 22 16.5526 22 13.1061 22H10.8939C7.44737 22 5.72409 22 4.54903 20.9882C3.37396 19.9764 3.13025 18.2827 2.64284 14.8952L2.36407 12.9579Z" stroke-width="1.5"/>
+						<path d="M15 18H9" stroke-width="1.5" stroke-linecap="round"/>
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a href="/pages/song_search.html">
+					<svg xmlns="http://www.w3.org/2000/svg" id="search-btn" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1">
+						<defs>
+							<style>.cls-1{fill:none;stroke-miterlimit:10;stroke-width:1.91px;}</style>
+						</defs>
+						<circle class="cls-1" cx="9.14" cy="9.14" r="7.64"/>
+						<line class="cls-1" x1="22.5" y1="22.5" x2="14.39" y2="14.39"/>
+					</svg>
+
+				</a>
+			</li>
+			<li style="display:none;">
+				<a href="/pages/request.html">
+					<svg xmlns="http://www.w3.org/2000/svg" id="request-btn" viewBox="0 0 32 32" id="icon">
+						<defs><style>.cls-1{fill:none;}</style></defs>
+						<path d="M22,22v6H6V4H16V2H6A2,2,0,0,0,4,4V28a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V22Z" transform="translate(0)"/><path d="M29.54,5.76l-3.3-3.3a1.6,1.6,0,0,0-2.24,0l-14,14V22h5.53l14-14a1.6,1.6,0,0,0,0-2.24ZM14.7,20H12V17.3l9.44-9.45,2.71,2.71ZM25.56,9.15,22.85,6.44l2.27-2.27,2.71,2.71Z" transform="translate(0)"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+					</svg>
+				</a>
+			</li>
+			<li>
+				<a href='/pages/song_list.html?favourite=1'>
+					<svg id="heart-btn-off" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier" stroke-width="1.5">
+						<path d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"></path></g>
+					</svg>
+				</a>
+			<li>
+				<a href="/pages/_profile.html">
+					<svg xmlns="http://www.w3.org/2000/svg" id="profile-btn-off" viewBox="0 0 16 16">
+						<path d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z"/>
+						<path d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z"/>
+					</svg>
+				</a>
+			</li>
+			<li style="display:none;">
+			<a href="/pages/profile.html">
+				<svg xmlns="http://www.w3.org/2000/svg" id="profile-btn-on" viewBox="0 0 16 16">
+					<path d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z"/>
+					<path d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z"/>
+				</svg>
+			</a>
+        </div>
+		<script src="/js/generic.js"></script>
+		<script src="/js/request.js"></script>
+		<script src="/js/songs.js"></script>
+    </body>
+</html>

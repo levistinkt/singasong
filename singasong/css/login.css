@@ -1,0 +1,43 @@
+.loginform {
+    padding: 1em 1em 0;
+}
+
+.loginctl{
+    display: flex;
+    justify-content: space-around;
+}
+
+.loginbtn {
+    width: 90%;
+    padding: 0.8em;
+    margin: 8px 0;
+}
+
+label{
+    color: var(--font-color);
+    font-size: var(--font-size);
+    font-family: var(--font);
+}
+
+#usr-form, #psw-form {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid white;
+    box-sizing: border-box;
+    color: var(--font-color);
+    font-size: var(--font-size);
+    background-color: var(--form-color);
+    font-family: var(--font);
+    border-radius: 5px;
+}
+
+form i {
+    margin-left: -30px;
+    cursor: pointer;
+}
+
+.bi-eye-slash::before{
+	color: var(--theme-color);
+}

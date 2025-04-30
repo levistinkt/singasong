@@ -1,0 +1,58 @@
+.settings-confirm{
+	padding: 0.5em;
+	margin: 0.5em;
+	opacity: 0.6;
+    border: solid 2px white;
+}
+
+#loader {
+    position: fixed;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 99;
+    border: 15px solid var(--theme-color);
+    border-radius: 50%;
+    border-top: 15px solid #ffffff;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+}
+
+#settings-controls{
+	display: flex;
+    justify-content: space-around;
+    padding: 2em;
+}
+
+#horizontal-pos, #vertical-pos{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#adminlinks{
+    display: flex;
+    justify-content: space-around;
+    padding: 1em;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+/* .rolldate-wrapper{ */
+	/* padding-bottom: 1em; */
+    /* padding-top: 1em; */
+/* } */
+
+#rolldate-confirm{
+	bottom: 0px;
+	background-color: white;
+	color: black;
+}
+
+#rolldate-year, #rolldate-month, #rolldate-day{
+    color: white;
+    font-size: var(--font-size-plus);
+}

@@ -1,0 +1,297 @@
+#songImage{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    overflow: hidden;
+    width: 100%;
+    height: 17em;
+    position: relative;
+}
+
+#songImage img{  
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.js-child{
+	padding-top: 1em;
+    padding-bottom: 0.2em;
+}
+
+#song_details, #song_links{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#songLang img{
+    width: var(--elem-size);
+    height: var(--h3-size);
+}
+
+#songYear{
+    color: var(--theme-color);
+    font-weight: bold;
+    font-size: var(--h3-size);   
+}
+
+#songArtist a, #songYear a, #songGenre a, #songEdition a{
+    text-decoration: none;
+    color: inherit;
+}
+
+#youtube{
+     height: var(--btn-height);
+}
+#spotify{
+    height: var(--h3-size);
+}
+
+#rapIcon, #duetIcon, #karaokeIcon, #singalongIcon{
+    height: var(--elem-size);
+    fill: var(--theme-color);
+}
+
+#Artist_Title {
+    display: flex;
+    flex-direction: column;
+    padding: 0em 1em 0em 1em;
+	color: var(--font-color);
+}
+
+#songTitle{
+    font-size: var(--h3-size);
+    font-weight: bold;
+    text-transform: uppercase;
+	overflow: hidden;
+}
+#songArtist{
+    font-size: var(--h4-size);
+    margin-bottom: 1em;
+	overflow: hidden;
+}
+
+#Genre_Edition{
+    padding: 0em 1em 0em 1em;
+	color: var(--font-color);
+}
+
+#_Genre, #_Edition{
+    Display: flex;
+}
+
+#genre-btn, #edition-btn{
+    height: var(--elem-size);
+    fill: none;
+    stroke:var(--font-color);
+    padding-right: 1em;
+}
+
+#artist-btn-dtl, #share-btn-dtl, #more-btn-dtl, #addVariantIcon{
+    height: var(--elem-size);
+    fill: none;
+    stroke: var(--theme-color);
+}
+
+.btn-on{
+    height: var(--elem-size);
+    fill: var(--theme-color);
+    stroke:var(--theme-color);
+}.btn-off{
+    height: var(--elem-size);
+    fill: none;
+    stroke:var(--theme-color);
+} 
+
+.btn-dtl-on{
+    height: 4em;
+    fill: var(--theme-color);
+    stroke: var(--theme-color);
+}.btn-dtl-off{
+    height: 4em;
+    fill: white;
+    stroke:var(--theme-color);
+} 
+
+#favourite {
+	position: absolute;
+    bottom: 2%;
+    right: 3%;
+	rotate: -20deg;
+}
+
+#queue {
+	position: absolute;
+    bottom: 4%;
+    left: 4%;
+	rotate: 20deg;
+}
+
+#queueIcon {
+    height: 4em;
+    fill: white;
+    stroke: none;
+}
+
+#queueIcon #icons_Q2 {
+    stroke: var(--theme-color);
+}
+
+@-webkit-keyframes wiggle { 
+	0% { -webkit-transform: skewX(9deg); }
+	10% { -webkit-transform: skewX(-8deg); }
+	20% { -webkit-transform: skewX(7deg); }
+	30% { -webkit-transform: skewX(-6deg); }
+	40% { -webkit-transform: skewX(5deg); } 
+	50% { -webkit-transform: skewX(-4deg); } 
+	60% { -webkit-transform: skewX(3deg); }
+	70% { -webkit-transform: skewX(-2deg); } 
+	80% { -webkit-transform: skewX(1deg); } 
+	90% { -webkit-transform: skewX(0deg); }
+	100% { -webkit-transform: skewX(0deg); } 
+}
+ 
+@keyframes wiggle { 
+	0% { transform: skewX(9deg); } 
+	10% { transform: skewX(-8deg); } 
+	20% { transform: skewX(7deg); } 
+	30% { transform: skewX(-6deg); } 
+	40% { transform: skewX(5deg); } 
+	50% { transform: skewX(-4deg); } 
+	60% { transform: skewX(3deg); } 
+	70% { transform: skewX(-2deg); } 
+	80% { transform: skewX(1deg); } 
+	90% { transform: skewX(0deg); } 
+	100% { transform: skewX(0deg); } 
+}
+ 
+.wiggle { 
+	-webkit-animation-name: wiggle;
+	-webkit-animation-timing-function: ease-in;
+	
+	animation-name: wiggle; 
+	animation-timing-function: ease-in; 
+}
+
+.wiggle { 
+	-webkit-animation-duration: 1.5s; 
+	animation-duration: 1.5s;
+}
+
+.dropdown-content {
+	display: none;
+	position: fixed;
+	background-color: var(--main-background);
+	overflow: auto;
+	border: 1px solid var(--font-color);
+	bottom: 40%;
+	border-radius: 10px;
+    left: 50%;
+    transform: translate(-50%);
+    justify-content: space-evenly;
+	flex-wrap: wrap;
+    align-items: center;
+	width: 90%;
+	height: -webkit-fill-available;
+	flex-direction: row-reverse;
+    align-content: stretch;
+	box-shadow: 6px -6px 12px rgba(0, 0, 0, 0.6);
+}
+
+.dropdown-content a {
+	color: var(--font-color);
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	height: 2em;
+	line-height: 2em; 
+	width: 20%;
+	text-align: center;
+	border-radius: 5px;
+	margin: 5px;
+}
+
+#players-form {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: space-evenly;
+	gap: 5px;
+	padding: 5px;
+	border: 1px solid var(--font-color);
+	border-radius: 5px;
+	background-color: white;
+	height: 6em;
+}
+
+.show {
+	display: flex;
+}
+
+.bi-chevron-expand::before{
+	color: var(--theme-color);
+	margin-left: -30px;
+    cursor: pointer;
+}
+
+#bgDropdownOverlay{
+    background-color:transparent;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    display:none;
+	z-index:4;
+}
+
+.QueueAddForm{
+	padding: 1em;
+}
+
+.QueueControl{
+    display: flex;
+    justify-content: space-around;
+}
+
+.confirm-btn{
+	background-color: white;
+    color: black;
+	padding: 1em;
+}
+
+label{
+    font-size: var(--font-size);
+    font-family: var(--font);
+}
+
+#artist-form, #title-form, #players-form {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid white;
+    box-sizing: border-box;
+    color: var(--font-color);
+    font-size: var(--font-size);
+    background-color: var(--form-color);
+    font-family: var(--font);
+    border-radius: 5px;
+}
+
+#songVariant{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+#elm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#elmTxt{
+	color: var(--font-color);
+}

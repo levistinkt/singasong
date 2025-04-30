@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Flipster Carousel Example</title>
+		<script src="../js/jquery-latest.js"></script>
+		<link rel="stylesheet" href="../css/jquery.flipster.min.css">
+		<script src="../js/jquery.flipster.min.js"></script>
+		<style>
+			.flipster .flipster__item img {
+				width: 150px;
+				height: 150px;
+				object-fit: cover;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="flipster">
+			<ul>
+				<li data-flip-title="Song 1">
+					<img src="../songs/Loreen - Euphoria [Karaoke]/Loreen - Euphoria [Karaoke].jpg" alt="Song 1">
+				</li>
+				<li data-flip-title="Song 2">
+					<img src="../songs/James Morrison feat. Nelly Furtado - Broken Strings [DUET]/James Morrison feat. Nelly Furtado - Broken Strings [DUET].jpg" alt="Song 2">
+				</li>
+				<li data-flip-title="Song 3">
+					<img src="../songs/Mart Hoogkamer - Unchained Melody/Mart Hoogkamer - Unchained Melody.jpg" alt="Song 3">
+				</li>
+				<li data-flip-title="Song 3">
+					<img src="../songs/Michael Buble ft. Lauren Allred - Help Me Make It Through The Night/Michael Buble ft. Lauren Allred - Help Me Make It Through The Night.jfif" alt="Song 3">
+				</li>
+				<li data-flip-title="Song 3">
+					<img src="../songs/Rose Royce - Car Wash/Rose Royce - Car Wash.jpg" alt="Song 3">
+				</li>
+			</ul>
+		</div>
+		<script>
+		  $(document).ready(function() {
+			$('.flipster').flipster({
+			  style: 'coverflow',
+			  spacing: -0.5,
+			  loop: true,
+			  autoplay: 3000,
+			  pauseOnHover: true,
+			  touch: true,
+			  keyboard: true,
+			  nav: false,
+			  buttons: false
+			});
+		  });
+		</script>
+	</body>
+</html>
